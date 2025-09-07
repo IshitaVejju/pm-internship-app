@@ -37,13 +37,40 @@ st.write("Welcome to **SmartAssigners** 💻 Your Internship Assistant Platform"
 # ---------- LOAD INTERNSHIPS ----------
 @st.cache_data
 def load_internships():
-    """Load internships data from CSV."""
-    csv_path = Path.cwd() / "data" / "internships.csv"  # safer than __file__
-    if csv_path.exists():
+    """
+    Load internships data from CSV safely.
+    Returns a list of internship records or an empty list if file is missing.
+    """
+    possible_paths = [
+        Path.cwd() / "data" / "internships.csv",        # common local dev path
+        Path(__file__).parent / "data" / "internships.csv"  # if running as a script
+    ]
+    
+    csv_path = None
+    for path in possible_paths:
+        if path.exists():
+            csv_path = path
+            break
+
+    if csv_path is None:
+        st.error("""
+        ⚠️ **Internships data not found!**  
+        Please make sure `internships.csv` exists in one of these locations relative to your app:
+        1. `./data/internships.csv` (recommended)
+        2. Same folder as `app.py` inside a `data` folder  
+        You can download or create a CSV with these columns:  
+        `InternshipID, Title, Sector, Location, Requirements, Stipend, Capacity, District, MinPercent`
+        """)
+        return []
+
+    try:
         df = pd.read_csv(csv_path)
+        if df.empty:
+            st.warning(f"⚠️ CSV file is empty: {csv_path}")
+            return []
         return df.to_dict("records")
-    else:
-        st.error(f"⚠️ Internships data not found at: {csv_path}")
+    except Exception as e:
+        st.error(f"❌ Error reading CSV at {csv_path}: {e}")
         return []
 
 internships = load_internships()
