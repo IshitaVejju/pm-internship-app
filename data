@@ -1,1 +1,268 @@
 data/internships.json
+[
+  {
+    "title": "AI Research Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Delhi",
+    "sector": "Artificial Intelligence",
+    "vacancies": 5,
+    "min_percent": 70
+  },
+  {
+    "title": "Rural Development Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Any",
+    "sector": "Social Impact",
+    "vacancies": 10,
+    "min_percent": 55
+  },
+  {
+    "title": "Data Analyst Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Bangalore",
+    "sector": "Information Technology",
+    "vacancies": 8,
+    "min_percent": 65
+  },
+  {
+    "title": "Marketing Strategy Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Mumbai",
+    "sector": "Marketing & Advertising",
+    "vacancies": 6,
+    "min_percent": 60
+  },
+  {
+    "title": "Financial Analyst Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Chennai",
+    "sector": "Banking & Financial Services",
+    "vacancies": 7,
+    "min_percent": 70
+  },
+  {
+    "title": "Healthcare Policy Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Hyderabad",
+    "sector": "Healthcare",
+    "vacancies": 5,
+    "min_percent": 65
+  },
+  {
+    "title": "Supply Chain Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Pune",
+    "sector": "Logistics & Supply Chain",
+    "vacancies": 4,
+    "min_percent": 60
+  },
+  {
+    "title": "Urban Planning Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Kolkata",
+    "sector": "Urban Development",
+    "vacancies": 3,
+    "min_percent": 65
+  },
+  {
+    "title": "Legal Research Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Delhi",
+    "sector": "Legal Services",
+    "vacancies": 5,
+    "min_percent": 70
+  },
+  {
+    "title": "Human Resources Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Bangalore",
+    "sector": "Human Resources",
+    "vacancies": 6,
+    "min_percent": 60
+  },
+  {
+    "title": "Content Development Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Mumbai",
+    "sector": "Media & Entertainment",
+    "vacancies": 4,
+    "min_percent": 55
+  },
+  {
+    "title": "Agricultural Research Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Chandigarh",
+    "sector": "Agriculture",
+    "vacancies": 5,
+    "min_percent": 60
+  },
+  {
+    "title": "Education Policy Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Bhopal",
+    "sector": "Education",
+    "vacancies": 4,
+    "min_percent": 65
+  },
+  {
+    "title": "Tourism Development Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Jaipur",
+    "sector": "Tourism & Hospitality",
+    "vacancies": 3,
+    "min_percent": 60
+  },
+  {
+    "title": "Energy Sustainability Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Ahmedabad",
+    "sector": "Energy & Environment",
+    "vacancies": 4,
+    "min_percent": 70
+  },
+  {
+    "title": "Retail Management Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Lucknow",
+    "sector": "Retail",
+    "vacancies": 5,
+    "min_percent": 55
+  },
+  {
+    "title": "Construction Project Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Nagpur",
+    "sector": "Construction & Infrastructure",
+    "vacancies": 4,
+    "min_percent": 65
+  },
+  {
+    "title": "Public Relations Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Kochi",
+    "sector": "Public Relations & Communications",
+    "vacancies": 3,
+    "min_percent": 60
+  },
+  {
+    "title": "Logistics Operations Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Surat",
+    "sector": "Logistics & Supply Chain",
+    "vacancies": 4,
+    "min_percent": 65
+  },
+  {
+    "title": "Financial Planning Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Pune",
+    "sector": "Banking & Financial Services",
+    "vacancies": 5,
+    "min_percent": 70
+  },
+  {
+    "title": "Telecommunications Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Gurugram",
+    "sector": "Telecommunications",
+    "vacancies": 4,
+    "min_percent": 60
+  },
+  {
+    "title": "Public Policy Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Chandigarh",
+    "sector": "Public Policy & Governance",
+    "vacancies": 3,
+    "min_percent": 65
+  },
+  {
+    "title": "Media Relations Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Delhi",
+    "sector": "Media & Entertainment",
+    "vacancies": 4,
+    "min_percent": 60
+  },
+  {
+    "title": "E-commerce Strategy Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Bangalore",
+    "sector": "E-commerce & Retail",
+    "vacancies": 5,
+    "min_percent": 65
+  },
+  {
+    "title": "Environmental Policy Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Shimla",
+    "sector": "Environment & Sustainability",
+    "vacancies": 4,
+    "min_percent": 70
+  },
+  {
+    "title": "Data Science Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Hyderabad",
+    "sector": "Information Technology",
+    "vacancies": 6,
+    "min_percent": 75
+  },
+  {
+    "title": "Quality Assurance Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Chennai",
+    "sector": "Manufacturing & Engineering",
+    "vacancies": 5,
+    "min_percent": 70
+  },
+  {
+    "title": "Digital Marketing Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Mumbai",
+    "sector": "Marketing & Advertising",
+    "vacancies": 4,
+    "min_percent": 65
+  },
+  {
+    "title": "Blockchain Development Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Bangalore",
+    "sector": "Information Technology",
+    "vacancies": 3,
+    "min_percent": 70
+  },
+  {
+    "title": "Cybersecurity Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Delhi",
+    "sector": "Information Technology",
+    "vacancies": 4,
+    "min_percent": 75
+  },
+  {
+    "title": "Artificial Intelligence Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Pune",
+    "sector": "Artificial Intelligence",
+    "vacancies": 5,
+    "min_percent": 80
+  },
+  {
+    "title": "Robotics Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Kolkata",
+    "sector": "Engineering & Robotics",
+    "vacancies": 4,
+    "min_percent": 70
+  },
+  {
+    "title": "Smart City Planning Intern",
+    "company": "Government of India – PM Internship Scheme",
+    "location": "Ahmedabad",
+    "sector": "Urban Development",
+    "vacancies": 3,
+    "min_percent": 65
+  }
+]
+
