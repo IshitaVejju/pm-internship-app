@@ -1,115 +1,38 @@
 internships.csv
-[
-  {
-    "InternshipID": 1,
-    "Title": "AI Research Intern",
-    "Sector": "Artificial Intelligence",
-    "Location": "Delhi",
-    "Requirements": "Bachelor's in Computer Science / AI / Related Fields",
-    "Stipend": 5000,
-    "Capacity": 5,
-    "District": "Delhi",
-    "MinPercent": 70
-  },
-  {
-    "InternshipID": 2,
-    "Title": "Rural Development Intern",
-    "Sector": "Social Impact",
-    "Location": "Any",
-    "Requirements": "Graduate in Social Sciences / Rural Studies / Related Fields",
-    "Stipend": 5000,
-    "Capacity": 10,
-    "District": "Any",
-    "MinPercent": 55
-  },
-  {
-    "InternshipID": 3,
-    "Title": "Data Analyst Intern",
-    "Sector": "Information Technology",
-    "Location": "Bangalore",
-    "Requirements": "Graduate in Statistics / Data Science / IT",
-    "Stipend": 5000,
-    "Capacity": 8,
-    "District": "Bangalore",
-    "MinPercent": 65
-  },
-  {
-    "InternshipID": 4,
-    "Title": "Marketing Strategy Intern",
-    "Sector": "Marketing & Advertising",
-    "Location": "Mumbai",
-    "Requirements": "Graduate in Marketing / Business Administration",
-    "Stipend": 5000,
-    "Capacity": 6,
-    "District": "Mumbai",
-    "MinPercent": 60
-  },
-  {
-    "InternshipID": 5,
-    "Title": "Financial Analyst Intern",
-    "Sector": "Banking & Financial Services",
-    "Location": "Chennai",
-    "Requirements": "Graduate in Finance / Economics / Commerce",
-    "Stipend": 5000,
-    "Capacity": 7,
-    "District": "Chennai",
-    "MinPercent": 70
-  },
-  {
-    "InternshipID": 6,
-    "Title": "Healthcare Policy Intern",
-    "Sector": "Healthcare",
-    "Location": "Hyderabad",
-    "Requirements": "Graduate in Healthcare Management / Public Health",
-    "Stipend": 5000,
-    "Capacity": 5,
-    "District": "Hyderabad",
-    "MinPercent": 65
-  },
-  {
-    "InternshipID": 7,
-    "Title": "Supply Chain Intern",
-    "Sector": "Logistics & Supply Chain",
-    "Location": "Pune",
-    "Requirements": "Graduate in Supply Chain / Logistics / Operations",
-    "Stipend": 5000,
-    "Capacity": 4,
-    "District": "Pune",
-    "MinPercent": 60
-  },
-  {
-    "InternshipID": 8,
-    "Title": "Urban Planning Intern",
-    "Sector": "Urban Development",
-    "Location": "Kolkata",
-    "Requirements": "Graduate in Urban Planning / Civil Engineering",
-    "Stipend": 5000,
-    "Capacity": 3,
-    "District": "Kolkata",
-    "MinPercent": 65
-  },
-  {
-    "InternshipID": 9,
-    "Title": "Legal Research Intern",
-    "Sector": "Legal Services",
-    "Location": "Delhi",
-    "Requirements": "Law Graduate / LLB",
-    "Stipend": 5000,
-    "Capacity": 5,
-    "District": "Delhi",
-    "MinPercent": 70
-  },
-  {
-    "InternshipID": 10,
-    "Title": "Human Resources Intern",
-    "Sector": "Human Resources",
-    "Location": "Bangalore",
-    "Requirements": "Graduate in HR / Business Administration",
-    "Stipend": 5000,
-    "Capacity": 6,
-    "District": "Bangalore",
-    "MinPercent": 60
-  }
-]
+InternshipID,Title,Sector,Location,Requirements,Stipend,Capacity,District,MinPercent
+I101,AI Research Intern,Artificial Intelligence,Delhi,"Python, AI, Machine Learning, Data Analysis",8000,5,Delhi,70
+I102,Rural Development Intern,Social Impact,Any,"Community Work, Data Analysis, Communication",6000,10,Any,55
+I103,Data Analyst Intern,Information Technology,Bangalore,"SQL, Excel, Data Visualization, Statistics",7000,8,Bangalore,65
+I104,Marketing Strategy Intern,Marketing & Advertising,Mumbai,"Marketing, Content Writing, SEO, Social Media",6000,6,Mumbai,60
+I105,Financial Analyst Intern,Banking & Financial Services,Chennai,"Financial Analysis, Excel, Accounting, Reporting",7000,7,Chennai,70
+I106,Healthcare Policy Intern,Healthcare,Hyderabad,"Healthcare, Policy Analysis, Communication",8000,5,Hyderabad,65
+I107,Supply Chain Intern,Logistics & Supply Chain,Pune,"Inventory Management, Procurement, Logistics",6000,4,Pune,60
+I108,Urban Planning Intern,Urban Development,Kolkata,"Planning, GIS, Research",7000,3,Kolkata,65
+I109,Legal Research Intern,Legal Services,Delhi,"Legal Research, Drafting, Case Analysis",8000,5,Delhi,70
+I110,Human Resources Intern,Human Resources,Bangalore,"Recruitment, Employee Relations, HR Policies",6000,6,Bangalore,60
+I111,Content Development Intern,Media & Entertainment,Mumbai,"Content Writing, Editing, Script Writing",5000,4,Mumbai,55
+I112,Agricultural Research Intern,Agriculture,Chandigarh,"Crop Study, Data Analysis, Field Research",7000,5,Chandigarh,60
+I113,Education Policy Intern,Education,Bhopal,"Policy Research, Data Analysis, Reporting",6000,4,Bhopal,65
+I114,Tourism Development Intern,Tourism & Hospitality,Jaipur,"Tourism Planning, Marketing, Communication",5000,3,Jaipur,60
+I115,Energy Sustainability Intern,Energy & Environment,Ahmedabad,"Renewable Energy, Data Analysis, Reporting",7000,4,Ahmedabad,70
+I116,Retail Management Intern,Retail,Lucknow,"Retail Analysis, Sales Strategy, Reporting",6000,5,Lucknow,55
+I117,Construction Project Intern,Construction & Infrastructure,Nagpur,"Project Planning, Documentation, Field Work",8000,4,Nagpur,65
+I118,Public Relations Intern,Public Relations & Communications,Kochi,"PR Campaigns, Media Coordination, Communication",5000,3,Kochi,60
+I119,Logistics Operations Intern,Logistics & Supply Chain,Surat,"Supply Chain Management, Inventory, Reporting",7000,4,Surat,65
+I120,Financial Planning Intern,Banking & Financial Services,Pune,"Budgeting, Forecasting, Financial Analysis",8000,5,Pune,70
+I121,Telecommunications Intern,Telecommunications,Gurugram,"Networking, Telecom Systems, Data Analysis",6000,4,Gurugram,60
+I122,Public Policy Intern,Public Policy & Governance,Chandigarh,"Policy Research, Governance, Reporting",7000,3,Chandigarh,65
+I123,Media Relations Intern,Media & Entertainment,Delhi,"Media Communication, Content Writing, PR",6000,4,Delhi,60
+I124,E-commerce Strategy Intern,E-commerce & Retail,Bangalore,"E-commerce Platforms, Marketing, Data Analysis",7000,5,Bangalore,65
+I125,Environmental Policy Intern,Environment & Sustainability,Shimla,"Environmental Studies, Policy Analysis, Reporting",8000,4,Shimla,70
+I126,Data Science Intern,Information Technology,Hyderabad,"Python, Data Analysis, Machine Learning",9000,6,Hyderabad,75
+I127,Quality Assurance Intern,Manufacturing & Engineering,Chennai,"Testing, Documentation, Process Improvement",7000,5,Chennai,70
+I128,Digital Marketing Intern,Marketing & Advertising,Mumbai,"SEO, Social Media, Google Analytics",6000,4,Mumbai,65
+I129,Blockchain Development Intern,Information Technology,Bangalore,"Blockchain, Python, Smart Contracts",8000,3,Bangalore,70
+I130,Cybersecurity Intern,Information Technology,Delhi,"Cybersecurity, Networking, Python",9000,4,Delhi,75
+I131,Artificial Intelligence Intern,Artificial Intelligence,Pune,"AI, Python, Machine Learning, Deep Learning",10000,5,Pune,80
+I132,Robotics Intern,Engineering & Robotics,Kolkata,"Robotics, C++, Electronics, Embedded Systems",8000,4,Kolkata,70
+I133,Smart City Planning Intern,Urban Development,Ahmedabad,"Urban Planning, GIS, Data Analysis",7000,3,Ahmedabad,65
+
 
 
