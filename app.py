@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from pathlib import Path
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(page_title="SmartAssigners", page_icon="🧑🏼‍💻", layout="centered")
@@ -32,10 +33,12 @@ st.write("Welcome to **SmartAssigners** 💻 Your Internship Assistant Platform"
 # ---------- LOAD INTERNSHIPS ----------
 @st.cache_data
 def load_internships():
+    csv_file = Path(__file__).parent / "data" / "internships.csv"
     try:
-        df = pd.read_csv("data/internships.csv")  # Admin updates externally
+        df = pd.read_csv(csv_file)
         return df.to_dict("records")
     except FileNotFoundError:
+        st.error("Internships data not found! Please ensure 'data/internships.csv' exists.")
         return []
 
 internships = load_internships()
@@ -57,24 +60,28 @@ with st.form("student_form"):
         if internships:
             matched_internships = []
             for i in internships:
-                # Eligibility based on percentage
-                if student_percent >= i.get("MinPercent", 0) if "MinPercent" in i else 0:
-                    # Basic skill matching
+                # Eligibility check
+                min_percent = int(i.get("MinPercent", 0))
+                if student_percent >= min_percent:
+                    # Skill matching
                     reqs = i.get("Requirements", "").lower()
                     skill_matches = sum(1 for s in skills.split(",") if s.strip() in reqs)
-                    sector_match = sector in i.get("Sector", "").lower()
-                    total_matches = skill_matches + (1 if sector_match else 0)
-                    # Calculate a simple matching percentage
-                    match_percentage = min(100, total_matches * 25)  # 4 matches = 100%
+                    # Sector match
+                    sector_match = 1 if sector in i.get("Sector", "").lower() else 0
+                    # Calculate match %
+                    match_percentage = min(100, (skill_matches + sector_match) * 25)
                     i["MatchPercent"] = match_percentage
                     matched_internships.append(i)
 
             if matched_internships:
-                # Sort by highest matching percentage
+                # Sort by match %
                 matched_internships.sort(key=lambda x: x["MatchPercent"], reverse=True)
                 st.success(f"{full_name}, here are your matched internships ranked by relevance:")
                 for i in matched_internships:
-                    st.write(f"- **{i['Title']}** at {i['Location']} ({i['Sector']}) | Match: {i['MatchPercent']}% | Stipend: ₹{i['Stipend']}")
+                    st.write(
+                        f"- **{i['Title']}** at {i['Location']} ({i['Sector']}) | "
+                        f"Match: {i['MatchPercent']}% | Stipend: ₹{i['Stipend']}"
+                    )
             else:
                 st.warning("No internships match your profile based on eligibility & skills/sector.")
         else:
