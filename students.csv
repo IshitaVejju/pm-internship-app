@@ -1,11 +1,1 @@
-StudentID,Name,Skills,Location,Preference,CGPA,Category,District
-S01,Ishita,"Python, Machine Learning, Data Analysis",Hyderabad,AI/ML,8.7,Urban,Hyderabad
-S02,Arjun,"Java, HTML, CSS, JavaScript, Web Development",Delhi,Software,8.1,Urban,New Delhi
-S03,Meera,"Healthcare, Communication, Data Entry",Mumbai,Health,8.4,Urban,Mumbai
-S04,Rahul,"C, Microcontrollers, Embedded Systems, Hardware",Ranchi,Electronics,7.9,Rural,Ranchi
-S05,Ananya,"Python, Machine Learning, Deep Learning, AI",Bangalore,AI/ML,9.1,Urban,Bengaluru
-S06,Kiran,"Marketing, Content Writing, SEO, Social Media",Patna,Media,7.8,Rural,Patna
-S07,Vivek,"SQL, Data Analysis, Excel, Python",Ahmedabad,AI/ML,8.3,Urban,Ahmedabad
-S08,Priya,"Android, Kotlin, Mobile Development",Jaipur,Software,8.0,Rural,Jaipur
-S09,Farhan,"Cybersecurity, Networking, Linux",Lucknow,Software,8.2,Rural,Lucknow
-S10,Sneha,"IOT, Embedded Systems, C++, Sensors",Bangalore,Electronics,8.6,Urban,Bengaluru
+
