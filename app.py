@@ -39,6 +39,7 @@ st.write("Welcome to **SmartAssigners** 💻 Your Internship Assistant Platform"
 def load_internships():
     """Load internships data from CSV."""
     csv_path = Path(__file__).parent / "data" / "internships.csv"
+    st.write("Looking for CSV at:", csv_file)
     if csv_path.exists():
         df = pd.read_csv(csv_path)
         return df.to_dict("records")
