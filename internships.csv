@@ -1,0 +1,7 @@
+InternshipID,Title,Sector,Location,Requirements,Stipend,Capacity,District
+I101,AI Research Intern,AI/ML,Hyderabad,"Python, AI, Machine Learning, Data Analysis",8000,2,Hyderabad
+I102,Web Developer Intern,Software,Delhi,"Java, HTML, CSS, JavaScript, Web Development",6000,2,New Delhi
+I103,Public Health Intern,Health,Mumbai,"Healthcare, Communication, Data Entry",5000,1,Mumbai
+I104,Embedded Systems Intern,Electronics,Ranchi,"C, Microcontrollers, Embedded Systems, Hardware",7000,2,Ranchi
+I105,Content & Marketing Intern,Media,Patna,"Marketing, Content Writing, SEO, Social Media",4000,2,Patna
+I106,IoT Project Intern,Electronics,Bangalore,"IoT, Embedded Systems, C++, Sensors",9000,1,Bengaluru
