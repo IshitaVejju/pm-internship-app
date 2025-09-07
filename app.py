@@ -34,11 +34,11 @@ st.write("Welcome to **SmartAssigners** 💻 Your Internship Assistant Platform"
 @st.cache_data
 def load_internships():
     csv_file = Path(__file__).parent / "data" / "internships.csv"
-    try:
+    if csv_file.exists():
         df = pd.read_csv(csv_file)
         return df.to_dict("records")
-    except FileNotFoundError:
-        st.error("Internships data not found! Please ensure 'data/internships.csv' exists.")
+    else:
+        st.error(f"Internships data not found: {csv_file}")
         return []
 
 internships = load_internships()
@@ -60,21 +60,19 @@ with st.form("student_form"):
         if internships:
             matched_internships = []
             for i in internships:
-                # Eligibility check
                 min_percent = int(i.get("MinPercent", 0))
                 if student_percent >= min_percent:
-                    # Skill matching
-                    reqs = i.get("Requirements", "").lower()
+                    # Skill match
+                    reqs = str(i.get("Requirements", "")).lower()
                     skill_matches = sum(1 for s in skills.split(",") if s.strip() in reqs)
                     # Sector match
-                    sector_match = 1 if sector in i.get("Sector", "").lower() else 0
-                    # Calculate match %
+                    sector_match = 1 if sector in str(i.get("Sector", "")).lower() else 0
+                    # Calculate simple matching percentage
                     match_percentage = min(100, (skill_matches + sector_match) * 25)
                     i["MatchPercent"] = match_percentage
                     matched_internships.append(i)
 
             if matched_internships:
-                # Sort by match %
                 matched_internships.sort(key=lambda x: x["MatchPercent"], reverse=True)
                 st.success(f"{full_name}, here are your matched internships ranked by relevance:")
                 for i in matched_internships:
