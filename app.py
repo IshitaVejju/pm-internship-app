@@ -41,6 +41,9 @@ def load_internships():
     csv_path = Path(__file__).parent / "data" / "internships.csv"
     if csv_path.exists():
         df = pd.read_csv(csv_path)
+        if df.empty:
+            st.warning("⚠️ Internships CSV found but it's empty.")
+            return []
         return df.to_dict("records")
     else:
         st.error(f"⚠️ Internships data not found at: {csv_path}")
@@ -65,6 +68,7 @@ with st.form("student_form"):
 if submitted:
     if internships:
         matched_internships = []
+
         for intern in internships:
             try:
                 min_percent = int(intern.get("MinPercent", 0))
@@ -80,16 +84,18 @@ if submitted:
                 # Sector matching
                 sector_match = 1 if preferred_sector in str(intern.get("Sector", "")).lower() else 0
 
-                # Calculate match score (basic weighted approach)
-                match_score = min(100, (skill_matches + sector_match) * 25)
+                # Location matching (optional)
+                location_match = 1 if preferred_location in str(intern.get("Location", "")).lower() else 0
 
+                # Calculate match score (weighted)
+                match_score = min(100, (skill_matches*25 + sector_match*25 + location_match*25))
                 intern["MatchPercent"] = match_score
+
                 matched_internships.append(intern)
 
         # ---------- DISPLAY RESULTS ----------
         if matched_internships:
             matched_internships.sort(key=lambda x: x["MatchPercent"], reverse=True)
-
             st.success(f"✅ {full_name}, here are your top internship matches:")
 
             for i in matched_internships:
@@ -100,6 +106,6 @@ if submitted:
                     f"| 👥 Capacity: {i['Capacity']}"
                 )
         else:
-            st.warning("⚠️ No internships match your profile based on eligibility & skills/sector.")
+            st.warning("⚠️ No internships match your profile based on eligibility & skills/sector/location.")
     else:
         st.error("❌ No internships available currently. Please check back later.")
