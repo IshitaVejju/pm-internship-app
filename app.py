@@ -3,7 +3,11 @@ import pandas as pd
 from pathlib import Path
 
 # ---------- PAGE CONFIG ----------
-st.set_page_config(page_title="SmartAssigners", page_icon="🧑🏼‍💻", layout="centered")
+st.set_page_config(
+    page_title="SmartAssigners",
+    page_icon="🧑🏼‍💻",
+    layout="centered"
+)
 
 # ---------- INDIAN FLAG THEME ----------
 st.markdown("""
@@ -33,54 +37,69 @@ st.write("Welcome to **SmartAssigners** 💻 Your Internship Assistant Platform"
 # ---------- LOAD INTERNSHIPS ----------
 @st.cache_data
 def load_internships():
-    csv_file = Path(__file__).parent / "data" / "internships.csv"
-    if csv_file.exists():
-        df = pd.read_csv(csv_file)
+    """Load internships data from CSV."""
+    csv_path = Path(__file__).parent / "data" / "internships.csv"
+    if csv_path.exists():
+        df = pd.read_csv(csv_path)
         return df.to_dict("records")
     else:
-        st.error(f"Internships data not found: {csv_file}")
+        st.error(f"⚠️ Internships data not found at: {csv_path}")
         return []
 
 internships = load_internships()
 
 # ---------- STUDENT PORTAL ----------
-st.subheader("🎓 Enter Your Details for Matching")
+st.subheader("🎓 Student Portal - Find Your Internship Match")
 
 with st.form("student_form"):
     full_name = st.text_input("Full Name")
     skills = st.text_area("Your Skills (comma separated)").lower()
-    location = st.text_input("Preferred Location").lower()
+    preferred_location = st.text_input("Preferred Location").lower()
     experience = st.text_input("Experience (if any)").lower()
-    sector = st.text_input("Preferred Sector").lower()
+    preferred_sector = st.text_input("Preferred Sector").lower()
     student_percent = st.number_input("Enter your percentage", min_value=0, max_value=100, value=70)
 
-    submitted = st.form_submit_button("Find My Internships")
+    submitted = st.form_submit_button("🔍 Find My Internships")
 
-    if submitted:
-        if internships:
-            matched_internships = []
-            for i in internships:
-                min_percent = int(i.get("MinPercent", 0))
-                if student_percent >= min_percent:
-                    # Skill match
-                    reqs = str(i.get("Requirements", "")).lower()
-                    skill_matches = sum(1 for s in skills.split(",") if s.strip() in reqs)
-                    # Sector match
-                    sector_match = 1 if sector in str(i.get("Sector", "")).lower() else 0
-                    # Calculate simple matching percentage
-                    match_percentage = min(100, (skill_matches + sector_match) * 25)
-                    i["MatchPercent"] = match_percentage
-                    matched_internships.append(i)
+# ---------- MATCHING LOGIC ----------
+if submitted:
+    if internships:
+        matched_internships = []
+        for intern in internships:
+            try:
+                min_percent = int(intern.get("MinPercent", 0))
+            except ValueError:
+                min_percent = 0
 
-            if matched_internships:
-                matched_internships.sort(key=lambda x: x["MatchPercent"], reverse=True)
-                st.success(f"{full_name}, here are your matched internships ranked by relevance:")
-                for i in matched_internships:
-                    st.write(
-                        f"- **{i['Title']}** at {i['Location']} ({i['Sector']}) | "
-                        f"Match: {i['MatchPercent']}% | Stipend: ₹{i['Stipend']}"
-                    )
-            else:
-                st.warning("No internships match your profile based on eligibility & skills/sector.")
+            # Eligibility check
+            if student_percent >= min_percent:
+                # Skill matching
+                requirements = str(intern.get("Requirements", "")).lower()
+                skill_matches = sum(1 for s in skills.split(",") if s.strip() in requirements)
+
+                # Sector matching
+                sector_match = 1 if preferred_sector in str(intern.get("Sector", "")).lower() else 0
+
+                # Calculate match score (basic weighted approach)
+                match_score = min(100, (skill_matches + sector_match) * 25)
+
+                intern["MatchPercent"] = match_score
+                matched_internships.append(intern)
+
+        # ---------- DISPLAY RESULTS ----------
+        if matched_internships:
+            matched_internships.sort(key=lambda x: x["MatchPercent"], reverse=True)
+
+            st.success(f"✅ {full_name}, here are your top internship matches:")
+
+            for i in matched_internships:
+                st.write(
+                    f"- **{i['Title']}** ({i['Sector']}) at {i['Location']}  "
+                    f"| 🎯 Match: {i['MatchPercent']}%  "
+                    f"| 💰 Stipend: ₹{i['Stipend']}  "
+                    f"| 👥 Capacity: {i['Capacity']}"
+                )
         else:
-            st.warning("No internships available currently. Please check back later.")
+            st.warning("⚠️ No internships match your profile based on eligibility & skills/sector.")
+    else:
+        st.error("❌ No internships available currently. Please check back later.")
