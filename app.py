@@ -28,7 +28,7 @@ st.markdown("""
 <div style="text-align:center; font-size:36px; font-weight:bold;
             background:linear-gradient(to right, #FF9933, #FFFFFF, #138808);
             padding:15px; border-radius:10px;">
-    SmartAssigners 👩‍💻
+SmartAssigners 👩‍💻
 </div>
 """, unsafe_allow_html=True)
 
@@ -37,25 +37,13 @@ st.write("Welcome to **SmartAssigners** 💻 Your Internship Assistant Platform"
 # ---------- LOAD INTERNSHIPS ----------
 @st.cache_data
 def load_internships():
-    """Load internships data reliably."""
-    try:
-        base_dir = Path(__file__).parent.resolve()
-        csv_path = base_dir / "data" / "internships.csv"
-        st.write("Looking for CSV at:", csv_path)  # Debug info
-
-        if not csv_path.exists():
-            st.error(f"❌ Internships data not found at: {csv_path}")
-            return []
-
+    """Load internships data from CSV."""
+    csv_path = Path.cwd() / "data" / "internships.csv"  # safer than __file__
+    if csv_path.exists():
         df = pd.read_csv(csv_path)
-        if df.empty:
-            st.warning("⚠️ Internships CSV found but it's empty.")
-            return []
-
         return df.to_dict("records")
-
-    except Exception as e:
-        st.error(f"⚠️ Error loading internships: {e}")
+    else:
+        st.error(f"⚠️ Internships data not found at: {csv_path}")
         return []
 
 internships = load_internships()
@@ -76,7 +64,6 @@ with st.form("student_form"):
 if submitted:
     if internships:
         matched_internships = []
-
         for intern in internships:
             try:
                 min_percent = int(intern.get("MinPercent", 0))
@@ -92,28 +79,23 @@ if submitted:
                 # Sector matching
                 sector_match = 1 if preferred_sector in str(intern.get("Sector", "")).lower() else 0
 
-                # Location matching (optional)
-                location_match = 1 if preferred_location in str(intern.get("Location", "")).lower() else 0
-
-                # Calculate match score (weighted)
-                match_score = min(100, (skill_matches*25 + sector_match*25 + location_match*25))
+                # Calculate match score (basic weighted approach)
+                match_score = min(100, (skill_matches + sector_match) * 25)
                 intern["MatchPercent"] = match_score
-
                 matched_internships.append(intern)
 
         # ---------- DISPLAY RESULTS ----------
         if matched_internships:
             matched_internships.sort(key=lambda x: x["MatchPercent"], reverse=True)
             st.success(f"✅ {full_name}, here are your top internship matches:")
-
             for i in matched_internships:
                 st.write(
-                    f"- **{i['Title']}** ({i['Sector']}) at {i['Location']}  "
-                    f"| 🎯 Match: {i['MatchPercent']}%  "
-                    f"| 💰 Stipend: ₹{i['Stipend']}  "
+                    f"- **{i['Title']}** ({i['Sector']}) at {i['Location']} "
+                    f"| 🎯 Match: {i['MatchPercent']}% "
+                    f"| 💰 Stipend: ₹{i['Stipend']} "
                     f"| 👥 Capacity: {i['Capacity']}"
                 )
         else:
-            st.warning("⚠️ No internships match your profile based on eligibility & skills/sector/location.")
+            st.warning("⚠️ No internships match your profile based on eligibility & skills/sector.")
     else:
         st.error("❌ No internships available currently. Please check back later.")
