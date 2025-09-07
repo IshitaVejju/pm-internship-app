@@ -37,16 +37,25 @@ st.write("Welcome to **SmartAssigners** 💻 Your Internship Assistant Platform"
 # ---------- LOAD INTERNSHIPS ----------
 @st.cache_data
 def load_internships():
-    """Load internships data from CSV."""
-    csv_path = Path(__file__).parent / "data" / "internships.csv"
-    if csv_path.exists():
+    """Load internships data reliably."""
+    try:
+        base_dir = Path(__file__).parent.resolve()
+        csv_path = base_dir / "data" / "internships.csv"
+        st.write("Looking for CSV at:", csv_path)  # Debug info
+
+        if not csv_path.exists():
+            st.error(f"❌ Internships data not found at: {csv_path}")
+            return []
+
         df = pd.read_csv(csv_path)
         if df.empty:
             st.warning("⚠️ Internships CSV found but it's empty.")
             return []
+
         return df.to_dict("records")
-    else:
-        st.error(f"⚠️ Internships data not found at: {csv_path}")
+
+    except Exception as e:
+        st.error(f"⚠️ Error loading internships: {e}")
         return []
 
 internships = load_internships()
@@ -61,7 +70,6 @@ with st.form("student_form"):
     experience = st.text_input("Experience (if any)").lower()
     preferred_sector = st.text_input("Preferred Sector").lower()
     student_percent = st.number_input("Enter your percentage", min_value=0, max_value=100, value=70)
-
     submitted = st.form_submit_button("🔍 Find My Internships")
 
 # ---------- MATCHING LOGIC ----------
