@@ -1,227 +1,193 @@
 import streamlit as st
-import pandas as pd
-from pathlib import Path
+from time import sleep
 
 # ---------- PAGE CONFIG ----------
-st.set_page_config(
-    page_title="SmartAssigners",
-    page_icon="🧑🏼‍💻",
-    layout="centered"
-)
-
-# ---------- INDIAN FLAG THEME ----------
-st.markdown("""
-<style>
-.stApp { background: linear-gradient(to bottom, #FF9933, #FFFFFF, #138808); }
-.stCard, .stForm, .stTextInput, .stNumberInput, .stTextArea {
-    background-color: white !important;
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-h2, h3, .stSubheader { color: #0b3d0b !important; }
-</style>
-""", unsafe_allow_html=True)
+st.set_page_config(page_title="भारत CareerAI", page_icon="📚", layout="wide")
 
 # ---------- HEADER ----------
-st.markdown("""
-<div style="text-align:center; font-size:36px; font-weight:bold;
-            background:linear-gradient(to right, #FF9933, #FFFFFF, #138808);
-            padding:15px; border-radius:10px;">
-SmartAssigners 👩‍💻
-</div>
-""", unsafe_allow_html=True)
-
-st.write("Welcome to **SmartAssigners** 💻 Your Internship Assistant Platform")
-
-# ---------- LOAD INTERNSHIPS ----------
-@st.cache_data
-def load_internships():
+st.markdown(
     """
-    Load internships data from CSV safely.
-    Returns a list of internship records or an empty list if file is missing.
-    """
-    # Updated paths to handle different possible locations
-    possible_paths = [
-        "internships.csv",  # Same directory as app.py
-        "data/internships.csv",  # In data folder
-        "data /internships.csv",  # Handle space in folder name
-        Path.cwd() / "internships.csv",
-        Path.cwd() / "data" / "internships.csv",
-        Path.cwd() / "data " / "internships.csv",  # Handle space in folder name
-        Path(__file__).parent / "internships.csv",
-        Path(__file__).parent / "data" / "internships.csv",
-        Path(__file__).parent / "data " / "internships.csv"  # Handle space in folder name
-    ]
-    
-    csv_path = None
-    for path in possible_paths:
-        try:
-            path_obj = Path(path)
-            if path_obj.exists():
-                csv_path = path_obj
-                break
-        except Exception:
-            continue
+    <style>
+    .main-title {
+        font-size: 32px;
+        font-weight: bold;
+        background: linear-gradient(to right, #FF9933, #000080, #138808);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .sub-title {
+        font-size: 16px;
+        color: #444;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-    if csv_path is None:
-        # If no file found, create sample data
-        st.warning("⚠️ Internships CSV not found. Using sample data for demo.")
-        return create_sample_data()
+col1, col2 = st.columns([0.8, 0.2])
+with col1:
+    st.markdown('<div class="main-title">भारत CareerAI</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-title">Empowering Indian Talent • स्मार्ट करियर मार्गदर्शन</div>', unsafe_allow_html=True)
+with col2:
+    st.success("🌏 Made in India")
 
-    try:
-        df = pd.read_csv(csv_path)
-        if df.empty:
-            st.warning(f"⚠️ CSV file is empty: {csv_path}")
-            return create_sample_data()
-        return df.to_dict("records")
-    except Exception as e:
-        st.error(f"❌ Error reading CSV at {csv_path}: {e}")
-        return create_sample_data()
+# ---------- TABS ----------
+tab1, tab2 = st.tabs(["🎯 Internship Finder", "🚀 Career Advisor"])
 
-def create_sample_data():
-    """Create sample internship data if CSV is not found"""
-    sample_data = [
-        {
-            "InternshipID": "I101",
-            "Title": "AI Research Intern",
-            "Sector": "Artificial Intelligence",
-            "Location": "Delhi",
-            "Requirements": "Python, AI, Machine Learning, Data Analysis",
-            "Stipend": 8000,
-            "Capacity": 5,
-            "District": "Delhi",
-            "MinPercent": 70
-        },
-        {
-            "InternshipID": "I102",
-            "Title": "Data Analyst Intern",
-            "Sector": "Information Technology",
-            "Location": "Bangalore",
-            "Requirements": "SQL, Excel, Data Visualization, Statistics",
-            "Stipend": 7000,
-            "Capacity": 8,
-            "District": "Bangalore",
-            "MinPercent": 65
-        },
-        {
-            "InternshipID": "I103",
-            "Title": "Marketing Strategy Intern",
-            "Sector": "Marketing & Advertising",
-            "Location": "Mumbai",
-            "Requirements": "Marketing, Content Writing, SEO, Social Media",
-            "Stipend": 6000,
-            "Capacity": 6,
-            "District": "Mumbai",
-            "MinPercent": 60
-        },
-        {
-            "InternshipID": "I104",
-            "Title": "Healthcare Policy Intern",
-            "Sector": "Healthcare",
-            "Location": "Hyderabad",
-            "Requirements": "Healthcare, Policy Analysis, Communication",
-            "Stipend": 8000,
-            "Capacity": 5,
-            "District": "Hyderabad",
-            "MinPercent": 65
-        },
-        {
-            "InternshipID": "I105",
-            "Title": "Data Science Intern",
-            "Sector": "Information Technology",
-            "Location": "Hyderabad",
-            "Requirements": "Python, Data Analysis, Machine Learning",
-            "Stipend": 9000,
-            "Capacity": 6,
-            "District": "Hyderabad",
-            "MinPercent": 75
-        }
-    ]
-    return sample_data
+# ---------- SAMPLE DATA ----------
+internships = [
+    {
+        "id": "I101",
+        "title": "AI Research Intern",
+        "sector": "Artificial Intelligence",
+        "location": "Delhi",
+        "requirements": "Python, AI, Machine Learning, Data Analysis",
+        "stipend": 8000,
+        "capacity": 5,
+        "minPercent": 70
+    },
+    {
+        "id": "I102",
+        "title": "Data Science Intern",
+        "sector": "Information Technology",
+        "location": "Hyderabad",
+        "requirements": "Python, Data Analysis, Machine Learning",
+        "stipend": 9000,
+        "capacity": 6,
+        "minPercent": 75
+    },
+    {
+        "id": "I103",
+        "title": "Digital Marketing Intern",
+        "sector": "Marketing & Advertising",
+        "location": "Mumbai",
+        "requirements": "SEO, Social Media, Google Analytics",
+        "stipend": 6000,
+        "capacity": 4,
+        "minPercent": 65
+    },
+    {
+        "id": "I104",
+        "title": "Blockchain Development Intern",
+        "sector": "Information Technology",
+        "location": "Bangalore",
+        "requirements": "Blockchain, Python, Smart Contracts",
+        "stipend": 8000,
+        "capacity": 3,
+        "minPercent": 70
+    },
+    {
+        "id": "I105",
+        "title": "Healthcare Policy Intern",
+        "sector": "Healthcare",
+        "location": "Chennai",
+        "requirements": "Healthcare, Policy Analysis, Communication",
+        "stipend": 8000,
+        "capacity": 5,
+        "minPercent": 65
+    }
+]
 
-internships = load_internships()
+skill_suggestions = {
+    "Software Engineer": ["JavaScript", "Python", "React", "Node.js", "Docker", "AWS", "Git", "SQL", "MongoDB", "TypeScript"],
+    "Data Scientist": ["Python", "R", "Machine Learning", "SQL", "Tableau", "TensorFlow", "Statistics", "pandas", "scikit-learn", "Jupyter"],
+    "Product Manager": ["Agile", "Scrum", "Analytics", "User Research", "Roadmapping", "A/B Testing", "Wireframing", "SQL", "JIRA", "Stakeholder Management"],
+    "UX Designer": ["Figma", "Adobe XD", "Sketch", "User Research", "Prototyping", "Wireframing", "Usability Testing", "Design Systems", "HTML/CSS", "Information Architecture"],
+    "Marketing Manager": ["Google Analytics", "SEO", "Content Marketing", "Social Media", "Email Marketing", "PPC", "CRM", "A/B Testing", "Brand Management", "Marketing Automation"]
+}
 
-# ---------- STUDENT PORTAL ----------
-st.subheader("🎓 Student Portal - Find Your Internship Match")
 
-with st.form("student_form"):
-    full_name = st.text_input("Full Name")
-    skills = st.text_area("Your Skills (comma separated)").lower()
-    preferred_location = st.text_input("Preferred Location").lower()
-    experience = st.text_input("Experience (if any)").lower()
-    preferred_sector = st.text_input("Preferred Sector").lower()
-    student_percent = st.number_input("Enter your percentage", min_value=0, max_value=100, value=70)
-    submitted = st.form_submit_button("🔍 Find My Internships")
+# ---------- INTERNSHIP FINDER ----------
+with tab1:
+    st.subheader("Student Profile")
+    name = st.text_input("Full Name")
+    skills = st.text_area("Your Skills (comma separated)", placeholder="Python, Machine Learning, Data Analysis")
+    percent = st.number_input("Percentage", 0, 100, 70)
+    location = st.text_input("Preferred Location")
+    sector = st.text_input("Preferred Sector")
 
-# ---------- MATCHING LOGIC ----------
-if submitted:
-    if internships:
-        matched_internships = []
-        for intern in internships:
-            try:
-                min_percent = int(intern.get("MinPercent", 0))
-            except (ValueError, TypeError):
-                min_percent = 0
-
-            # Eligibility check
-            if student_percent >= min_percent:
-                # Skill matching
-                requirements = str(intern.get("Requirements", "")).lower()
-                user_skills = [s.strip() for s in skills.split(",") if s.strip()]
-                skill_matches = sum(1 for s in user_skills if s in requirements)
-
-                # Location matching
-                intern_location = str(intern.get("Location", "")).lower()
-                location_match = 1 if preferred_location and preferred_location in intern_location else 0
-
-                # Sector matching
-                sector_match = 1 if preferred_sector and preferred_sector in str(intern.get("Sector", "")).lower() else 0
-
-                # Calculate match score (improved weighted approach)
-                base_score = min(100, (skill_matches * 30) + (sector_match * 40) + (location_match * 30))
-                intern["MatchPercent"] = base_score
-                matched_internships.append(intern)
-
-        # ---------- DISPLAY RESULTS ----------
-        if matched_internships:
-            matched_internships.sort(key=lambda x: x["MatchPercent"], reverse=True)
-            st.success(f"✅ {full_name}, here are your top internship matches:")
-            
-            # Display as a table for better presentation
-            display_data = []
-            for i in matched_internships[:10]:  # Show top 10 matches
-                display_data.append({
-                    "Title": i['Title'],
-                    "Sector": i['Sector'],
-                    "Location": i['Location'],
-                    "Stipend": f"₹{i['Stipend']}",
-                    "Capacity": i['Capacity'],
-                    "Match %": f"{i['MatchPercent']}%"
-                })
-            
-            df_display = pd.DataFrame(display_data)
-            st.dataframe(df_display, use_container_width=True)
-            
-            st.info(f"📊 Found {len(matched_internships)} matching internships based on your profile!")
+    if st.button("🔍 Find My Internships"):
+        if not name or not skills:
+            st.warning("⚠️ Please enter your name and skills.")
         else:
-            st.warning("⚠️ No internships match your profile based on eligibility & skills/sector.")
-    else:
-        st.error("❌ No internships available currently. Please check back later.")
+            with st.spinner("AI is finding best matches for you..."):
+                sleep(2)
+                user_skills = [s.strip().lower() for s in skills.split(",") if s.strip()]
+                matches = []
+                for internship in internships:
+                    if percent >= internship["minPercent"]:
+                        reqs = internship["requirements"].lower()
+                        skill_matches = sum(1 for s in user_skills if s in reqs)
+                        loc_match = 20 if location and location.lower() in internship["location"].lower() else 0
+                        sec_match = 30 if sector and sector.lower() in internship["sector"].lower() else 0
+                        match_score = min(100, (skill_matches * 20) + sec_match + loc_match + 30)
+                        if match_score > 30:
+                            internship["matchScore"] = match_score
+                            matches.append(internship)
 
-# ---------- DEBUG INFO ----------
-with st.expander("🔍 Debug Information (for developers)"):
-    st.write(f"Total internships loaded: {len(internships)}")
-    if internships:
-        st.write("Sample internship data:")
-        st.json(internships[0])
-    
-    # Show current working directory and file structure
-    st.write(f"Current working directory: {Path.cwd()}")
-    st.write("Files in current directory:")
-    try:
-        files = list(Path.cwd().iterdir())
-        for file in files[:10]:  # Show first 10 files/folders
-            st.write(f"- {file.name} ({'folder' if file.is_dir() else 'file'})")
-    except Exception as e:
-        st.write(f"Error listing files: {e}")
+                matches = sorted(matches, key=lambda x: x["matchScore"], reverse=True)
+
+                if not matches:
+                    st.info("No matching internships found. Try updating your profile.")
+                else:
+                    for idx, m in enumerate(matches, 1):
+                        with st.container():
+                            st.markdown(f"### #{idx} {m['title']} ({m['matchScore']}%)")
+                            st.write(f"**Sector:** {m['sector']}")
+                            st.write(f"**Location:** {m['location']}")
+                            st.write(f"**Requirements:** {m['requirements']}")
+                            st.write(f"**Stipend:** ₹{m['stipend']} per month")
+                            st.divider()
+
+
+# ---------- CAREER ADVISOR ----------
+with tab2:
+    st.subheader("Career Advisor")
+    target_role = st.text_input("🎯 Target Role", placeholder="e.g., Data Scientist")
+    experience = st.selectbox("Experience Level", ["Entry", "Mid", "Senior"])
+    user_skills = st.text_area("Your Current Skills", placeholder="Python, SQL, Statistics...")
+
+    if st.button("✨ Get Career Suggestions"):
+        if not target_role or not user_skills:
+            st.warning("⚠️ Please enter target role and skills.")
+        else:
+            with st.spinner("Analyzing your profile..."):
+                sleep(2)
+                current_skills = [s.strip().lower() for s in user_skills.split(",") if s.strip()]
+                required_skills = [s.lower() for s in skill_suggestions.get(target_role, [])]
+                missing = [s for s in required_skills if s not in current_skills]
+
+                suggestions = [
+                    {
+                        "title": f"Master {missing[0] if missing else 'Advanced Programming'}",
+                        "priority": "High",
+                        "timeline": "3-6 months"
+                    },
+                    {
+                        "title": f"Develop {missing[1] if len(missing) > 1 else 'Communication'} Skills",
+                        "priority": "High",
+                        "timeline": "2-4 months"
+                    },
+                    {
+                        "title": f"Build Portfolio in {missing[2] if len(missing) > 2 else 'Your Domain'}",
+                        "priority": "Medium",
+                        "timeline": "1-3 months"
+                    },
+                    {
+                        "title": "Industry Networking & Visibility",
+                        "priority": "Medium",
+                        "timeline": "Ongoing"
+                    },
+                    {
+                        "title": f"Gain {'Internship' if experience == 'Entry' else 'Leadership'} Experience",
+                        "priority": "Low",
+                        "timeline": "6-12 months"
+                    }
+                ]
+
+                for sug in suggestions:
+                    color = {"High": "🔴", "Medium": "🟡", "Low": "🟢"}[sug["priority"]]
+                    st.markdown(f"### {color} {sug['title']}")
+                    st.write(f"- **Priority:** {sug['priority']}")
+                    st.write(f"- **Timeline:** {sug['timeline']}")
+                    st.divider()
